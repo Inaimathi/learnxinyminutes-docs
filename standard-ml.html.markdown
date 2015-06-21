@@ -141,7 +141,6 @@ val good_bad_stuff =
 
 
 (* Records are tuples with named slots *)
-
 val rgb = { r=0.23, g=0.56, b=0.91 } (* : {b:real, g:real, r:real} *)
 
 (* You don't need to declare their slots ahead of time. Records with
@@ -246,6 +245,13 @@ fun fibonacci 0 = 0  (* Base case *)
   | fibonacci 1 = 1  (* Base case *)
   | fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)  (* Recursive case *)
 
+(* Or, equivalently as a case statement: *)
+fun fibonacci n =
+  case n of
+      0 => 0
+    | 1 => 1
+	| n => fibonacci (n - 1) + fibonacci (n - 2)
+
 (* Pattern matching is also possible on composite types like tuples, lists and
    records. Writing "fun solve2 (a, b, c) = ..." is in fact a pattern match on
    the one three-tuple solve2 takes as argument. Similarly, but less intuitively,
@@ -259,7 +265,6 @@ fun evenly_positioned_elems (odd::even::xs) = even::evenly_positioned_elems xs
 
 (* When matching on records, you must use their slot names, and you must bind
    every slot in a record. The order of the slots doesn't matter though. *)
-
 fun rgbToTup {r, g, b} = (r, g, b)    (* fn : {b:'a, g:'b, r:'c} -> 'c * 'b * 'a *)
 fun mixRgbToTup {g, b, r} = (r, g, b) (* fn : {b:'a, g:'b, r:'c} -> 'c * 'b * 'a *)
 
